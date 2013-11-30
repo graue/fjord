@@ -2,3 +2,4 @@
 *.swp
 /target/
 /.lein-repl-history
+/.lein-failures
