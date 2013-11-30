@@ -1,4 +1,4 @@
-(ns fjord
+(ns fjord.app
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.handler :as h]
             [compojure.route :as route]))
@@ -9,5 +9,3 @@
 
 (def handler
   (h/site app-routes))
-
-

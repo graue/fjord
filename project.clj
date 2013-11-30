@@ -5,7 +5,7 @@
                  [ring-server "0.3.1"]
                  [hiccup "1.0.4"]]
   :plugins [[lein-ring "0.8.8"]]
-  :ring {:handler fjord/handler}
+  :ring {:handler fjord.app/handler}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.5"]
                         [ring/ring-devel "1.2.1"]]}})
