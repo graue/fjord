@@ -1,5 +1,5 @@
 (ns fjord.test.posts
-  (:require [fjord.posts :refer :all]
+  (:require [fjord.models.post :as post]
             [clojure.test :refer [deftest is run-tests]]))
 
 (def test-posts
@@ -13,11 +13,11 @@
     :body "Blah blah blah."}])
 
 (deftest posting
-  (with-redefs [fjord.posts/posts (atom ())]
+  (with-redefs [fjord.models.post/posts (atom ())]
     (let [test-post (test-posts 0)
-          id (add-post! test-post)]
-      (is (= (get-post id)
-             (first (retrieve-posts :limit 1))
+          id (post/add! test-post)]
+      (is (= (post/get-by-id id)
+             (first (post/retrieve-latest :limit 1))
              (assoc test-post :id id))))))
 
 (comment
