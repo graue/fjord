@@ -8,4 +8,4 @@
   (let [posts (post/retrieve-latest :offset (or offset 0))]
     (layout
       :title "Recent posts"
-      :body (post-listing posts))))
+      :content (post-listing posts))))
