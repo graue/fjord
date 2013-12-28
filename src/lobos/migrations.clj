@@ -13,3 +13,9 @@
              (varchar :title 200)
              (text :content))))
   (down [] (drop (table :posts))))
+
+(defmigration rename-content-to-body
+  (up [] (alter :drop (table :posts (column :content)))
+         (alter :add (table :posts (text :body))))
+  (down [] (alter :add (table :posts (text :content)))
+           (alter :drop (table :posts (column :body)))))
