@@ -3,7 +3,11 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.6"]
                  [ring-server "0.3.1"]
-                 [hiccup "1.0.4"]]
+                 [hiccup "1.0.4"]
+                 [org.postgresql/postgresql "9.3-1100-jdbc41"]
+                 ; Note: java.jdbc dependency must stay in sync with Lobos.
+                 [org.clojure/java.jdbc "0.3.0-beta1"]
+                 [lobos "1.0.0-beta1"]]
   :plugins [[lein-ring "0.8.8"]]
   :ring {:handler fjord.app/handler}
   :profiles
