@@ -1,11 +1,7 @@
 (ns lobos.config
-  (:use lobos.connectivity))
+  (:use lobos.connectivity)
+  (:require fjord.config))
 
-(def db
-  {:classname "org.postgresql.Driver"
-   :subprotocol "postgresql"
-   :user "dbuser"
-   :password "foobar"
-   :subname "//localhost:5432/fjord"})
+(def db fjord.config/dbspec)
 
 (open-global db)
