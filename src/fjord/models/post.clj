@@ -1,26 +1,28 @@
 (ns fjord.models.post
-  "Storage for posts.
-
-  Currently posts are stored only in memory, not persisted to disk.")
+  "Storage for posts."
+  (:require fjord.config
+            [clojure.java.jdbc :refer [query insert!]])
+  (:refer fjord.config :rename {dbspec db}))
 
 (defonce ^:private posts (atom ()))
 
 (defn get-by-id
   [id]
-  (first (filter #(= (:id %) id) @posts)))
+  (first (query db ["SELECT id, title, body
+                       FROM posts WHERE id = ?" id])))
 
 (defn retrieve-latest
   "Retrieves latest posts, skipping `offset` (if provided) and limiting
   to `limit` results (if provided, else 10)."
   [& {:keys [offset limit]
       :or {offset 0, limit 10}}]
-  (take limit (drop offset @posts)))
+  (query db ["SELECT id, title, body
+                FROM posts
+                ORDER BY created_on OFFSET ? LIMIT ?"
+             offset
+             limit]))
 
 (defn add!
   "Adds a post, assigning it a unique ID and returning that ID."
   [post]
-  (let [last-id (-> (retrieve-latest :limit 1) first (get :id 0))
-        new-id (inc last-id)
-        new-post (assoc post :id new-id)]
-    (swap! posts conj new-post)
-    new-id))
+  (:id (insert! db :posts post)))
