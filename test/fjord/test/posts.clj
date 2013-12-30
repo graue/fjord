@@ -28,12 +28,11 @@
         (clear-test-db)))))
 
 (deftest posting
-  (with-redefs [fjord.models.post/posts (atom ())]
-    (let [test-post (test-posts 0)
-          id (post/add! test-post)]
-      (is (= (post/get-by-id id)
-             (first (post/retrieve-latest :limit 1))
-             (assoc test-post :id id))))))
+  (let [test-post (test-posts 0)
+        id (post/add! test-post)]
+    (is (= (post/get-by-id id)
+           (first (post/retrieve-latest :limit 1))
+           (assoc test-post :id id)))))
 
 (comment
   (run-tests)

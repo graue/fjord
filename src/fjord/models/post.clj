@@ -4,8 +4,6 @@
             [clojure.java.jdbc :refer [query insert!]])
   (:refer fjord.config :rename {dbspec db}))
 
-(defonce ^:private posts (atom ()))
-
 (defn get-by-id
   [id]
   (first (query db ["SELECT id, title, body
