@@ -9,4 +9,4 @@
    :subname
    (str "//" (get env :fjord-db-host "localhost")
         ":" (get env :fjord-db-port 5432)
-        "/" (get env :fjord-db-table "fjord"))})
+        "/" (get env :fjord-db-name "fjord"))})
