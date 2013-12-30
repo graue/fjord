@@ -18,7 +18,7 @@
       :or {offset 0, limit 10}}]
   (query db ["SELECT id, title, body
                 FROM posts
-                ORDER BY created_on OFFSET ? LIMIT ?"
+                ORDER BY created_on DESC OFFSET ? LIMIT ?"
              offset
              limit]))
 
