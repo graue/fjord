@@ -1,6 +1,7 @@
 (ns fjord.test.posts
   (:require [fjord.models.post :as post]
-            [clojure.test :refer [deftest is run-tests]]))
+            [clojure.test :as ct :refer [deftest is run-tests]]
+            [lobos.core :refer [migrate rollback]]))
 
 (def test-posts
   [{:title "My Awesome Day"
@@ -11,6 +12,20 @@
 
    {:title "Foobar"
     :body "Blah blah blah."}])
+
+(defn initialize-test-db []
+  (migrate))
+
+(defn clear-test-db []
+  (rollback :all))
+
+(ct/use-fixtures :once
+  (fn [tests]
+    (try
+      (initialize-test-db)
+      (tests)
+      (finally
+        (clear-test-db)))))
 
 (deftest posting
   (with-redefs [fjord.models.post/posts (atom ())]

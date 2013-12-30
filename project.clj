@@ -16,4 +16,5 @@
   {:dev {:dependencies [[ring-mock "0.1.5"]
                         [ring/ring-devel "1.2.1"]]
          :env {:fjord-db-user "dbuser"
-               :fjord-db-name "fjord"}}})
+               :fjord-db-name "fjord"}}
+   :test {:env {:fjord-db-name "fjord-test"}}})
