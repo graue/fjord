@@ -25,4 +25,4 @@
 (defn add!
   "Adds a post, assigning it a unique ID and returning that ID."
   [post]
-  (:id (insert! db :posts post)))
+  (:id (first (insert! db :posts post))))
